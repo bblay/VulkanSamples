@@ -37,6 +37,7 @@ class GravitySceneSplash : public GravityScene {
     virtual bool Update(float comp_time, float game_time);
     virtual bool Draw();
     virtual bool End();
+    virtual bool Unload();
 
    protected:
     // We don't want any copy constructors

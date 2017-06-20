@@ -51,6 +51,7 @@ class GravityScene {
     virtual bool Update(float comp_time, float game_time) = 0;
     virtual bool Draw() = 0;
     virtual bool End() = 0;
+    virtual bool Unload() = 0;
 
    protected:
     // Json Root info

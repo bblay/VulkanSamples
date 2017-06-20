@@ -36,6 +36,8 @@ bool GravitySceneSplash::Load(GravityDeviceExtIf *dev_ext_if, GravityDeviceMemor
         return false;
     }
 
+    // Create and read the texture, but don't actually load it until we start this scene.  That way
+    // we only use the memory that we need.
     m_texture = new GravityTexture(m_inst_ext_if, m_dev_ext_if, m_dev_memory_mgr);
     if (nullptr == m_texture) {
         logger.LogError("GravitySceneSplash::Load - failed to allocate GravityTexture");
@@ -51,6 +53,11 @@ bool GravitySceneSplash::Load(GravityDeviceExtIf *dev_ext_if, GravityDeviceMemor
 }
 
 bool GravitySceneSplash::Start() {
+    GravityLogger &logger = GravityLogger::getInstance();
+    if (!m_texture->Load()) {
+        logger.LogError("GravitySceneSplash::Start - failed to load GravityTexture");
+        return false;
+    }
     return true;
 }
 
@@ -65,6 +72,19 @@ bool GravitySceneSplash::Draw() {
 }
 
 bool GravitySceneSplash::End() {
-    bool success = true;
-    return success;
+    GravityLogger &logger = GravityLogger::getInstance();
+    if (!m_texture->Unload()) {
+        logger.LogError("GravitySceneSplash::End - failed to unload GravityTexture");
+        return false;
+    }
+    return true;
 }
+
+bool GravitySceneSplash::Unload() {
+    if (nullptr != m_texture) {
+        delete m_texture;
+        m_texture = nullptr;
+    }
+    return true;
+}
+
