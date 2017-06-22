@@ -134,6 +134,8 @@ add_executable(LunarGravity
                 ${GRAVITY_OS_SOURCES}
                 engine/gravitydevicememory.cpp
                 engine/gravitydevicememory.hpp
+                engine/gravityshader.cpp
+                engine/gravityshader.hpp
                 engine/gravitytexture.cpp
                 engine/gravitytexture.hpp
                 engine/gravityscene.cpp

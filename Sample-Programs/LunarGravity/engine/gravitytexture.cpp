@@ -159,6 +159,8 @@ bool GravityTexture::ReadPPM(std::string const &filename) {
 
 out:
     infile->close();
+    delete infile;
+
     return read;
 }
 
